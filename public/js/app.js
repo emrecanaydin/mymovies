@@ -12,7 +12,7 @@ movieapp.controller('searchMovies', function($scope,$http,Helpers) {
 				//$scope.movies.push(val);
 			//});
 		}, function(error) {
-			alert(error.message);
+			alert(error);
 		});
 		
 	};
@@ -23,7 +23,7 @@ movieapp.controller('searchMovies', function($scope,$http,Helpers) {
 			Helpers.preloader(false);
 			Helpers.openmodal();
 		}, function(error) {
-			alert(error.message);
+			alert(error);
 		});
 	};
 });
