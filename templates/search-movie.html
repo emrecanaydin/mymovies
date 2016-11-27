@@ -1,0 +1,36 @@
+<div class="search-movie">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<form ng-submit="getMovies(1)">
+					<div class="search-area">
+						<input type="txtMovieName" class="form-control" id="txtMovieName" placeholder="Örn: Mad Max" />
+						<button type="button" id="btn-searchmovie" class="btn btn-primary btn-lg btn-getmovies" ng-click="getMovies(1)">Listele</button>
+						<label>Selam :) Filmlerinizi arşivleyin, izlediklerinizi ve izleyeceklerinizi listeleyin.</label>
+					</div>
+				</form>
+				<div class="results-area">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
+							<div class="movie-item">
+								<div class="movie-image" ng-if="item.Poster != 'N/A'"><img alt="{{item.Title}}" ng-src="{{item.Poster}}" /></div>
+								<div class="movie-content">
+									<h3>{{item.Title}}</h3>
+									<h4>{{item.Year}}</h4>
+									<a href="" ng-click="getMovieDetail(item.imdbID)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
+									<a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Favorilere Ekle</a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-sm-push-3" ng-if="movies.Response == 'False'">
+							<div class="movie-item not-found">
+								<h3>Film bulunamadı :(</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
