@@ -1,8 +1,23 @@
-var movieapp = angular.module('movieapp',[]);
+var mymovies = angular.module("movieapp", ["ngRoute"]);
 
-movieapp.controller('searchMovies', function($scope,$http,Helpers) {
+mymovies.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+	when('/', {
+		templateUrl: 'templates/search-movie.html',
+		controller: 'searchMovies'
+	}).
+	when('/MovieDetail/:imdbId', {
+		templateUrl: 'templates/movie-detail.html',
+		controller: 'movieDetail'
+	}).
+		otherwise({
+		redirectTo: '/'
+	});
+}]);
+
+mymovies.controller('searchMovies', function($scope,$http,Helpers) {
 	$scope.movies = [];
-	$scope.movieObject = [];
 	$scope.getMovies = function(pageindex) {
 		Helpers.preloader(true);
 		$http.get(Helpers.getApiUrl() + "?s="+document.getElementById("txtMovieName").value + "&page="+ pageindex).then(function(result) {
@@ -16,19 +31,22 @@ movieapp.controller('searchMovies', function($scope,$http,Helpers) {
 		});
 		
 	};
-	$scope.getMovieDetail = function(imdbid) {
-		Helpers.preloader(true);
-		$http.get(Helpers.getApiUrl() + "?i="+ imdbid + "&plot=short&r=json").then(function(result) {
-			$scope.movieObject = result.data;
-			Helpers.preloader(false);
-			Helpers.openmodal();
-		}, function(error) {
-			alert(error);
-		});
-	};
 });
 
-movieapp.factory('Helpers', [ function() {
+mymovies.controller('movieDetail', function($scope,$routeParams,$http,Helpers) {
+	$scope.movieObject = [];
+	$scope.movieid = $routeParams.imdbId;
+	Helpers.preloader(true);
+	$http.get(Helpers.getApiUrl() + "?i="+$routeParams.imdbId+"&plot=short&r=json").then(function(result) {
+		$scope.movieObject = result.data;
+		Helpers.preloader(false);
+	}, function(error) {
+		alert(error);
+	});
+});
+
+
+mymovies.factory('Helpers', [ function() {
 	class helpers {
 		getApiUrl(){
 			return "http://www.omdbapi.com/";

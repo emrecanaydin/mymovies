@@ -47,9 +47,10 @@ h3, h4{
 }
 
 
-.search-movie{
+.content{
 	margin-top: 150px;
 }
+
 .search-movie .search-area{
 	width: 640px;
 	margin: 0 auto;
@@ -84,25 +85,34 @@ h3, h4{
 	padding: 20px;
 	margin-bottom: 30px;
 	border-radius: 6px;
+	height: 130px;
 }
 
-.search-movie .results-area .movie-item .movie-image{
-	display: inline-block;
-	float: left;
-	width: 15%;
-	overflow: hidden;
-}
 .search-movie .results-area .movie-item .movie-image img{
-	width: 57px;
-	height: 85px;
+	width: 100%;
 }
-.search-movie .results-area .movie-item .movie-content{
-	display: inline-block;
-	float: left;
-	width: 85%;
+.search-movie .results-area .movie-item .movie-content .movie-title{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
+.search-movie .results-area .movie-item.not-found{
+	height: auto;
+}
 .search-movie .results-area .movie-item.not-found h3{
 	text-align: center;
 	margin-bottom: 0px;
+}
+
+
+.movie-detail .inner-content{
+	background: white;
+	padding: 20px;
+	margin-bottom: 30px;
+	border-radius: 6px;
+}
+.movie-detail .btn-goback{
+	margin-bottom: 10px;
+	float: right;
 }

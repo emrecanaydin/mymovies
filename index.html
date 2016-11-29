@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<title>Filmlerim | Arşivleyin, listeleyin.</title>
 	<script src="public/js/angular.min.js"></script>
+	<script src="public/js/angular-route.js"></script>
+
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 	<link rel="stylesheet" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/bootstrap-theme.min.css">
@@ -16,7 +18,7 @@
 
 <body ng-app="movieapp">
 
-	<div class="wrapper" ng-controller="searchMovies">
+	<div class="wrapper">
 
 		<div id="loader-wrapper">
 			<div id="loader"></div>
@@ -24,65 +26,21 @@
 			<div class="loader-section section-right"></div>
 		</div>
 		
-		<div class="modal-overlay" id="modal-overlay" ng-click="closeMovieDetail()"></div>
+		<div class="modal-overlay" id="modal-overlay"></div>
 
-		<div class="modal" id="modal">
-			<div class="movie-detail">
-				<div class="row">
-					<div class="col-xs-4" class="movie-image" ng-if="movieObject.Poster != 'N/A'">
-						<img alt="{{movieObject.Title}}" ng-src="{{movieObject.Poster}}" style="width:100%" />
-					</div>
-					<div class="col-xs-8">
-						<h3>{{movieObject.Title}}</h3>
-						<p><strong>IMDD Puanı: </strong> {{movieObject.imdbRating}}</p>
-						<p><strong>Yıl: </strong> {{movieObject.Year}}</p>
-						<p><strong>Tür: </strong> {{movieObject.Genre}}</p>
-						<p><strong>Yönetmen: </strong> {{movieObject.Director}}</p>
-						<p><strong>Senarist: </strong> {{movieObject.Writer}}</p>
-						<p><strong>Oyuncular: </strong> {{movieObject.Actors}}</p>
-					</div>
-				</div>
-				
-			</div>
-		</div>
+		<div class="modal" id="modal"></div>
 
-		<div class="search-movie">
+		<div class="content">
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12">
-						<form ng-submit="getMovies(1)">
-							<div class="search-area">
-								<input type="txtMovieName" class="form-control" id="txtMovieName" placeholder="Örn: Mad Max" />
-								<button type="button" id="btn-searchmovie" class="btn btn-primary btn-lg btn-getmovies" ng-click="getMovies(1)">Listele</button>
-								<label>Selam :) Filmlerinizi arşivleyin, izlediklerinizi ve izleyeceklerinizi listeleyin.</label>
-							</div>
-						</form>
-						<div class="results-area">
-							<div class="row">
-								<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
-									<div class="movie-item">
-										<div class="movie-image" ng-if="item.Poster != 'N/A'"><img alt="{{item.Title}}" ng-src="{{item.Poster}}" /></div>
-										<div class="movie-content">
-											<h3>{{item.Title}}</h3>
-											<h4>{{item.Year}}</h4>
-											<a href="" ng-click="getMovieDetail(item.imdbID)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
-											<a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Favorilere Ekle</a>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-6 col-sm-push-3" ng-if="movies.Response == 'False'">
-									<div class="movie-item not-found">
-										<h3>Film bulunamadı :(</h3>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div ng-view></div>
 					</div>
 				</div>
 			</div>
 		</div>
-	
+		
+
 	</div>
 	
 	<script src="public/js/app.js"></script>

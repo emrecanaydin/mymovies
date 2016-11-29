@@ -1,0 +1,31 @@
+<div class="movie-detail">
+	<div class="container">
+		<a href="#!/" class="btn btn-sm btn-primary btn-goback"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		<div class="clearfix"></div>
+		<div class="inner-content">
+			<div class="row" ng-if="movieObject.Response == 'True'">
+				<div class="col-xs-12 col-sm-3" class="movie-image" ng-if="movieObject.Poster != 'N/A'">
+					<img alt="{{movieObject.Title}}" ng-src="{{movieObject.Poster}}" style="width:100%" />
+				</div>
+				<div class="col-xs-12 col-sm-9">
+					<h3>{{movieObject.Title}}</h3>
+					<p><strong>IMDD Puanı: </strong> {{movieObject.imdbRating}}</p>
+					<p><strong>Yıl: </strong> {{movieObject.Year}}</p>
+					<p><strong>Tür: </strong> {{movieObject.Genre}}</p>
+					<p><strong>Yönetmen: </strong> {{movieObject.Director}}</p>
+					<p><strong>Senarist: </strong> {{movieObject.Writer}}</p>
+					<p><strong>Oyuncular: </strong> {{movieObject.Actors}}</p>
+					<p><strong>Süre: </strong> {{movieObject.Runtime}}</p>
+					<p><strong>Ülke: </strong> {{movieObject.Country}}</p>
+				</div>
+			</div>
+			<div class="row" ng-if="movieObject.Response == 'False'">
+				<div class="col-xs-12 col-sm-6 col-sm-push-3" >
+					<div class="movie-item not-found">
+						<h3>Houston, sorunumuz var :(</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
