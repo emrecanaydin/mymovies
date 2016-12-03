@@ -1,10 +1,14 @@
 <div class="movie-detail">
 	<div class="container">
-		<a href="#!/" class="btn btn-sm btn-primary btn-goback"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		<h1 class="page-title">Film Detay</h1>
+		<div class="action-group">
+			<a href class="btn btn-sm btn-default" back-button><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+			<a href="javascript:;" onclick="Helpers.User.addWatchList(this)" data-movie-name="{{movieObject.Title}}" data-movie-year="{{movieObject.Year}}" data-movie-poster="{{movieObject.Poster}}" data-movie-imdbid="{{movieObject.imdbID}}" class="btn btn-success btn-sm" ng-if="movieObject.Response == 'True'"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
+		</div>
 		<div class="clearfix"></div>
-		<div class="inner-content">
+		<div class="white-inner-content">
 			<div class="row" ng-if="movieObject.Response == 'True'">
-				<div class="col-xs-12 col-sm-3" class="movie-image" ng-if="movieObject.Poster != 'N/A'">
+				<div class="col-xs-12 col-sm-3 movie-image" ng-if="movieObject.Poster != 'N/A'">
 					<img alt="{{movieObject.Title}}" ng-src="{{movieObject.Poster}}" style="width:100%" />
 				</div>
 				<div class="col-xs-12 col-sm-9">
@@ -21,7 +25,7 @@
 			</div>
 			<div class="row" ng-if="movieObject.Response == 'False'">
 				<div class="col-xs-12 col-sm-6 col-sm-push-3" >
-					<div class="movie-item not-found">
+					<div class="movie-item not-found txt-center">
 						<h3>Houston, sorunumuz var :(</h3>
 					</div>
 				</div>

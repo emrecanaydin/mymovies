@@ -1,12 +1,13 @@
 <div class="search-movie">
 	<form ng-submit="getMovies(1)">
 		<div class="search-area">
+			<label>Selam :) Filmlerinizi arşivleyin, izlediklerinizi ve izleyeceklerinizi listeleyin.</label>
 			<input type="txtMovieName" class="form-control" id="txtMovieName" placeholder="Örn: Mad Max" />
 			<button type="button" id="btn-searchmovie" class="btn btn-primary btn-lg btn-getmovies" ng-click="getMovies(1)">Listele</button>
-			<label>Selam :) Filmlerinizi arşivleyin, izlediklerinizi ve izleyeceklerinizi listeleyin.</label>
 		</div>
 	</form>
 	<div class="results-area">
+		<h1 class="page-title" style="float: none;" ng-if="movies.Search.length > 0">Arama Sonuçları</h1>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
 				<div class="movie-item">
@@ -16,13 +17,13 @@
 							<h3 class="movie-title">{{item.Title}}</h3>
 							<h4>{{item.Year}}</h4>
 							<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
-							<a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Favorilere Ekle</a>
+							<a href="javascript:;" onclick="Helpers.User.addWatchList(this)" data-movie-name="{{item.Title}}" data-movie-year="{{item.Year}}" data-movie-poster="{{item.Poster}}" data-movie-imdbid="{{item.imdbID}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-sm-push-3" ng-if="movies.Response == 'False'">
-				<div class="movie-item not-found">
+				<div class="movie-item not-found txt-center">
 					<h3>Film bulunamadı :(</h3>
 				</div>
 			</div>

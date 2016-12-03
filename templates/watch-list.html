@@ -1,0 +1,31 @@
+<div class="watch-list">
+	<div class="container">
+		<h1 class="page-title">İzlenecekler Listem</h1>
+		<div class="action-group">
+			<a href class="btn btn-sm btn-default" back-button><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6" ng-repeat="item in movieList">
+				<div class="movie-item">
+					<div class="row">
+						<div class="col-sm-2 movie-image">
+							<img alt="" src="{{item.poster}}" style="width: 100%" />
+						</div>
+						<div class="col-sm-10">
+							<h3>{{item.name}}</h3>
+							<h4>{{item.year}}</h4>
+							<a href="#!/MovieDetail/{{item.id}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
+							<a href="#!/" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Listeden Çıkar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12" ng-if="movieList.length == 0">
+				<div class="movie-item not-found txt-center">
+					<h3>İzlenecek listeniz boş, film aramak için <a href="#!/">tıklayın</a>!</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

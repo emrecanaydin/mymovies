@@ -11,21 +11,22 @@ mymovies.config(['$routeProvider',
 		templateUrl: 'templates/movie-detail.html',
 		controller: 'movieDetail'
 	}).
-		otherwise({
-		redirectTo: '/'
+	when('/WatchList/', {
+		templateUrl: 'templates/watch-list.html',
+		controller: 'watchList'
+	}).
+	otherwise({
+		templateUrl:'templates/404.html'
 	});
 }]);
 
-mymovies.controller('searchMovies', function($scope,$http,Helpers) {
+mymovies.controller('searchMovies', function($scope,$http) {
 	$scope.movies = [];
 	$scope.getMovies = function(pageindex) {
-		Helpers.preloader(true);
-		$http.get(Helpers.getApiUrl() + "?s="+document.getElementById("txtMovieName").value + "&page="+ pageindex).then(function(result) {
+		Helpers.Preloader.open();
+		$http.get(Helpers.Api.getApiUrl + "?s="+document.getElementById("txtMovieName").value + "&page="+ pageindex).then(function(result) {
 			$scope.movies = result.data;
-			Helpers.preloader(false);
-			//result.data.Search.forEach(function(val, i) { 
-				//$scope.movies.push(val);
-			//});
+			Helpers.Preloader.close();
 		}, function(error) {
 			alert(error);
 		});
@@ -33,19 +34,35 @@ mymovies.controller('searchMovies', function($scope,$http,Helpers) {
 	};
 });
 
-mymovies.controller('movieDetail', function($scope,$routeParams,$http,Helpers) {
+mymovies.controller('movieDetail', function($scope,$routeParams,$http) {
 	$scope.movieObject = [];
 	$scope.movieid = $routeParams.imdbId;
-	Helpers.preloader(true);
-	$http.get(Helpers.getApiUrl() + "?i="+$routeParams.imdbId+"&plot=short&r=json").then(function(result) {
+	Helpers.Preloader.open();
+	$http.get(Helpers.Api.getApiUrl + "?i="+$routeParams.imdbId+"&plot=short&r=json").then(function(result) {
 		$scope.movieObject = result.data;
-		Helpers.preloader(false);
+		Helpers.Preloader.close();
 	}, function(error) {
 		alert(error);
 	});
 });
 
+mymovies.controller('watchList', function($scope,$http) {
+	$scope.movieList = localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+});
 
+mymovies.directive( 'backButton', function() {
+    return {
+        restrict: 'A',
+        link: function( scope, element, attrs ) {
+            element.on( 'click', function () {
+                history.back();
+                scope.$apply();
+            } );
+        }
+    };
+} );
+
+/*
 mymovies.factory('Helpers', [ function() {
 	class helpers {
 		getApiUrl(){
@@ -65,4 +82,4 @@ mymovies.factory('Helpers', [ function() {
 	}
 	let helperlist = new helpers();
 	return helperlist;
-}]);
+}]);*/

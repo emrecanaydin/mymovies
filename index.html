@@ -3,13 +3,14 @@
 <html lang="tr">
 <head>
 	<meta charset="utf-8">
-	<title>Filmlerim | Arşivleyin, listeleyin.</title>
+	<title>Ana Sayfa | Filmlerim</title>
 	<script src="public/js/angular.min.js"></script>
 	<script src="public/js/angular-route.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
 	<link rel="stylesheet" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="public/css/sweetalert.css">
 	<link rel="stylesheet" href="public/css/site.css">
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -29,6 +30,15 @@
 		<div class="modal-overlay" id="modal-overlay"></div>
 
 		<div class="modal" id="modal"></div>
+		
+		<ul class="topnav" id="topnav">
+			<a href="#!/">Ana Sayfa</a>
+			<a href="#!/WatchList">İzlenecekler Listem</a>
+			<a href="#!/Contact">İletişim</a>
+			<div class="icon">
+				<a href="javascript:void(0);" onclick="Helpers.MobileMenu()">&#9776;</a>
+			</div>
+		</ul>
 
 		<div class="content">
 			<div class="container">
@@ -43,6 +53,9 @@
 
 	</div>
 	
+	<script src="public/js/sweetalert.min.js"></script>
+	<script src="public/js/underscore-min.js"></script>
+	<script src="public/js/site.js"></script>
 	<script src="public/js/app.js"></script>
 	
 </body>
