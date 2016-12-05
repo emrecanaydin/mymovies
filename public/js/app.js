@@ -18,7 +18,33 @@ mymovies.config(['$routeProvider',
 	otherwise({
 		templateUrl:'templates/404.html'
 	});
+
 }]);
+
+mymovies.controller('mainCtrl', function($scope){
+	
+	$scope.AddWatchList = function(movie){
+		var watchlist = localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+		newmovieitem = {
+			"name": movie.Title,
+			"year": movie.Year,
+			"poster": movie.Poster,
+			"id": movie.imdbID
+		};
+		watchlist.push(newmovieitem);
+		localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
+		swal({title: "Tamamdır!",text: "Film, izlenecekler listenize eklendi.",timer: 900,showConfirmButton: false});
+	}
+	$scope.RemoveMovieWatchList = function(movie){
+		var watchlist = localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+		watchlist = _.without(watchlist, _.findWhere(watchlist, {
+		  id: movie.id
+		}));
+		localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
+		swal({title: "Tamamdır!",text: "Film, izlenecekler listenizden çıkartıldı.",timer: 900,showConfirmButton: false});
+	}
+	
+});
 
 mymovies.controller('searchMovies', function($scope,$http) {
 	$scope.movies = [];
@@ -47,8 +73,13 @@ mymovies.controller('movieDetail', function($scope,$routeParams,$http) {
 });
 
 mymovies.controller('watchList', function($scope,$http) {
-	$scope.movieList = localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+	$scope.movieList = [];
+	$scope.loadUserWatchList = function () {
+		$scope.movieList = localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+	};
+	$scope.loadUserWatchList();
 });
+
 
 mymovies.directive( 'backButton', function() {
     return {

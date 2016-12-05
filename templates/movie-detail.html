@@ -1,33 +1,31 @@
 <div class="movie-detail">
-	<div class="container">
-		<h1 class="page-title">Film Detay</h1>
-		<div class="action-group">
-			<a href class="btn btn-sm btn-default" back-button><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
-			<a href="javascript:;" onclick="Helpers.User.addWatchList(this)" data-movie-name="{{movieObject.Title}}" data-movie-year="{{movieObject.Year}}" data-movie-poster="{{movieObject.Poster}}" data-movie-imdbid="{{movieObject.imdbID}}" class="btn btn-success btn-sm" ng-if="movieObject.Response == 'True'"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
-		</div>
-		<div class="clearfix"></div>
-		<div class="white-inner-content">
-			<div class="row" ng-if="movieObject.Response == 'True'">
-				<div class="col-xs-12 col-sm-3 movie-image" ng-if="movieObject.Poster != 'N/A'">
-					<img alt="{{movieObject.Title}}" ng-src="{{movieObject.Poster}}" style="width:100%" />
-				</div>
-				<div class="col-xs-12 col-sm-9">
-					<h3>{{movieObject.Title}}</h3>
-					<p><strong>IMDD Puanı: </strong> {{movieObject.imdbRating}}</p>
-					<p><strong>Yıl: </strong> {{movieObject.Year}}</p>
-					<p><strong>Tür: </strong> {{movieObject.Genre}}</p>
-					<p><strong>Yönetmen: </strong> {{movieObject.Director}}</p>
-					<p><strong>Senarist: </strong> {{movieObject.Writer}}</p>
-					<p><strong>Oyuncular: </strong> {{movieObject.Actors}}</p>
-					<p><strong>Süre: </strong> {{movieObject.Runtime}}</p>
-					<p><strong>Ülke: </strong> {{movieObject.Country}}</p>
-				</div>
+	<h1 class="page-title">Film Detay</h1>
+	<div class="action-group">
+		<a href class="btn btn-sm btn-default" back-button><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		<a href="javascript:;" ng-click="AddWatchList(movieObject)" class="btn btn-success btn-sm" ng-if="movieObject.Response == 'True'"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
+	</div>
+	<div class="clearfix"></div>
+	<div class="white-inner-content">
+		<div class="row" ng-if="movieObject.Response == 'True'">
+			<div class="col-xs-12 col-sm-3 movie-image" ng-if="movieObject.Poster != 'N/A'">
+				<img alt="{{movieObject.Title}}" ng-src="{{movieObject.Poster}}" style="width:100%" />
 			</div>
-			<div class="row" ng-if="movieObject.Response == 'False'">
-				<div class="col-xs-12 col-sm-6 col-sm-push-3" >
-					<div class="movie-item not-found txt-center">
-						<h3>Houston, sorunumuz var :(</h3>
-					</div>
+			<div class="col-xs-12 col-sm-9">
+				<h3>{{movieObject.Title}}</h3>
+				<p><strong>IMDD Puanı: </strong> {{movieObject.imdbRating}}</p>
+				<p><strong>Yıl: </strong> {{movieObject.Year}}</p>
+				<p><strong>Tür: </strong> {{movieObject.Genre}}</p>
+				<p><strong>Yönetmen: </strong> {{movieObject.Director}}</p>
+				<p><strong>Senarist: </strong> {{movieObject.Writer}}</p>
+				<p><strong>Oyuncular: </strong> {{movieObject.Actors}}</p>
+				<p><strong>Süre: </strong> {{movieObject.Runtime}}</p>
+				<p><strong>Ülke: </strong> {{movieObject.Country}}</p>
+			</div>
+		</div>
+		<div class="row" ng-if="movieObject.Response == 'False'">
+			<div class="col-xs-12 col-sm-6 col-sm-push-3" >
+				<div class="movie-item not-found txt-center">
+					<h3>Houston, sorunumuz var :(</h3>
 				</div>
 			</div>
 		</div>

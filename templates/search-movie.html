@@ -17,7 +17,7 @@
 							<h3 class="movie-title">{{item.Title}}</h3>
 							<h4>{{item.Year}}</h4>
 							<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
-							<a href="javascript:;" onclick="Helpers.User.addWatchList(this)" data-movie-name="{{item.Title}}" data-movie-year="{{item.Year}}" data-movie-poster="{{item.Poster}}" data-movie-imdbid="{{item.imdbID}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
+							<a href="javascript:;" ng-click="AddWatchList(item)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
 						</div>
 					</div>
 				</div>
