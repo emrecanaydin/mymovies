@@ -2,6 +2,11 @@ var Helpers ={
 	Api : {
 		getApiUrl:  "http://www.omdbapi.com/"
 	},
+	WatchList: {
+		get: function(){
+			return localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+		}
+	},
 	Preloader : {
 		open: function(){
 			document.body.className = "loading"
@@ -28,5 +33,4 @@ var Helpers ={
 			x.className = "topnav";
 		}
 	}
-	
 }

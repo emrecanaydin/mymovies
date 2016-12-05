@@ -9,13 +9,13 @@
 			<div class="movie-item">
 				<div class="row">
 					<div class="col-sm-2 movie-image">
-						<img alt="" ng-src="{{item.poster}}" style="width: 100%" />
+						<img alt="{{item.Title}}" ng-src="{{item.Poster}}" style="width: 100%" />
 					</div>
 					<div class="col-sm-10">
-						<h3>{{item.name}}</h3>
-						<h4>{{item.year}}</h4>
-						<a href="#!/MovieDetail/{{item.id}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
-						<a href="javascript:;" ng-click="RemoveMovieWatchList(item); loadUserWatchList();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Listeden Çıkar</a>
+						<h3>{{item.Title}}</h3>
+						<h4>{{item.Year}}</h4>
+						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
+						<a href="javascript:;" ng-click="RemoveMovieWatchList(item); loadUserWatchList();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> İzleme Listemden Çıkar</a>
 					</div>
 				</div>
 			</div>

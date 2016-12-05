@@ -2,7 +2,8 @@
 	<h1 class="page-title">Film Detay</h1>
 	<div class="action-group">
 		<a href class="btn btn-sm btn-default" back-button><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
-		<a href="javascript:;" ng-click="AddWatchList(movieObject)" class="btn btn-success btn-sm" ng-if="movieObject.Response == 'True'"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
+		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == false" ng-click="AddWatchList(movieObject); getMovieDetail();" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
+		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == true"  ng-click="RemoveMovieWatchList(movieObject); getMovieDetail();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> İzleme Listemden Çıkar</a>
 	</div>
 	<div class="clearfix"></div>
 	<div class="white-inner-content">
