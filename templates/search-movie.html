@@ -12,8 +12,8 @@
 			<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
 				<div class="movie-item">
 					<div class="row">
-						<div class="movie-image col-xs-2" ng-if="item.Poster != 'N/A'"><img alt="{{item.Title}}" ng-src="{{item.Poster}}" /></div>
-						<div class="movie-content col-xs-10">
+						<div class="movie-image col-sm-2 col-xs-12" ng-if="item.Poster != 'N/A'"><img alt="{{item.Title}}" ng-src="{{item.Poster}}" /></div>
+						<div class="movie-content col-sm-10 col-xs-12">
 							<h3 class="movie-title">{{item.Title}}</h3>
 							<h4>{{item.Year}}</h4>
 							<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>

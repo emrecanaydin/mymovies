@@ -1,7 +1,7 @@
 var mymovies = angular.module("movieapp", ["ngRoute"]);
 
 mymovies.config(['$routeProvider',
-  function($routeProvider) {
+  function($routeProvider, $locationProvider) {
     $routeProvider.
 	when('/', {
 		title: 'Ana Sayfa',
@@ -22,7 +22,6 @@ mymovies.config(['$routeProvider',
 		title: '404 Sayfa Bulunamadı',
 		templateUrl:'templates/404.html'
 	});
-
 }]);
 
 mymovies.controller('mainCtrl', function($scope){
@@ -76,7 +75,7 @@ mymovies.controller('movieDetail', function($scope,$routeParams,$http) {
 	$scope.movieid = $routeParams.imdbID;
 	Helpers.Preloader.open();
 	$scope.getMovieDetail = function() {
-		$http.get(Helpers.Api.getApiUrl + "?i="+$routeParams.imdbID+"&plot=short&r=json").then(function(result) {
+		$http.get(Helpers.Api.getApiUrl + "?i="+$scope.movieid+"&plot=short&r=json").then(function(result) {
 			$scope.movieObject = result.data;
 			Helpers.Preloader.close();
 		}, function(error) {

@@ -193,11 +193,20 @@ h3, h4{
 
 
 @media screen and (max-width:767px) {
+	.content{
+		margin-top: 40px;
+	}
 	.content h1.page-title{
 		font-size: 29px;
-		margin-top: 10px;
+		float: none;
+		margin-bottom: 15px;
 	}
-	.movie-detail .movie-image, .watch-list .movie-image{
+	.content .action-group{
+		float: none;
+		margin-top: 0;
+		margin-bottom: 15px;
+	}
+	.movie-detail .movie-image, .watch-list .movie-image, .search-movie .results-area .movie-item .movie-image{
 		margin-bottom: 15px;
 	}
 	.watch-list .movie-item{
