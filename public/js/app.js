@@ -5,8 +5,13 @@ mymovies.config(['$routeProvider',
     $routeProvider.
 	when('/', {
 		title: 'Ana Sayfa',
-		templateUrl: 'templates/search-movie.html',
-		controller: 'searchMovies'
+		templateUrl: 'templates/home-page.html',
+		controller: 'homePage'
+	}).
+	when('/SearchMovie/:Keyword', {
+		title: 'Arama Sonuçları',
+		templateUrl: 'templates/search-results.html',
+		controller: 'searchResults'
 	}).
 	when('/MovieDetail/:imdbID', {
 		title: 'Film Detay',
@@ -25,6 +30,9 @@ mymovies.config(['$routeProvider',
 }]);
 
 mymovies.controller('mainCtrl', function($scope){
+	$scope.goPreviousPage = function() {
+		window.history.back();
+	};
 	$scope.AddWatchList = function(movie){
 		var watchlist = Helpers.WatchList.get();
 		newmovieitem = {
@@ -56,18 +64,25 @@ mymovies.controller('mainCtrl', function($scope){
 	}
 });
 
-mymovies.controller('searchMovies', function($scope,$http) {
+mymovies.controller('homePage', function($scope,$http) {
+	$scope.runSearch = function() {
+		window.location.href = "#!/SearchMovie/" + document.getElementById("txtMovieName").value;
+	};
+});
+
+mymovies.controller('searchResults', function($scope,$routeParams,$http) {
 	$scope.movies = [];
-	$scope.getMovies = function(pageindex) {
+	$scope.keyword = $routeParams.Keyword;
+	$scope.getSearchResults = function(pageindex) {
 		Helpers.Preloader.open();
-		$http.get(Helpers.Api.getApiUrl + "?s="+document.getElementById("txtMovieName").value + "&page="+ pageindex).then(function(result) {
+		$http.get(Helpers.Api.getApiUrl + "?s="+$scope.keyword+"&page="+ pageindex).then(function(result) {
 			$scope.movies = result.data;
 			Helpers.Preloader.close();
 		}, function(error) {
 			alert(error);
 		});
-		
 	};
+	$scope.getSearchResults(1);
 });
 
 mymovies.controller('movieDetail', function($scope,$routeParams,$http) {
@@ -93,7 +108,7 @@ mymovies.controller('watchList', function($scope,$http) {
 	$scope.loadUserWatchList();
 });
 
-mymovies.directive( 'backButton', function() {
+/*mymovies.directive( 'backButton', function() {
     return {
         restrict: 'A',
         link: function( scope, element, attrs ) {
@@ -103,7 +118,7 @@ mymovies.directive( 'backButton', function() {
             } );
         }
     };
-} );
+} );*/
 
 /*
 mymovies.factory('Helpers', [ function() {

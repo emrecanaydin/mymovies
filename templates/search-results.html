@@ -1,13 +1,10 @@
 <div class="search-movie">
-	<form ng-submit="getMovies(1)">
-		<div class="search-area">
-			<label>Selam :) Filmlerinizi arşivleyin, izlediklerinizi ve izleyeceklerinizi listeleyin.</label>
-			<input type="txtMovieName" class="form-control" id="txtMovieName" placeholder="Örn: Mad Max" />
-			<button type="button" id="btn-searchmovie" class="btn btn-primary btn-lg btn-getmovies" ng-click="getMovies(1)">Listele</button>
-		</div>
-	</form>
 	<div class="results-area">
-		<h1 class="page-title" style="float: none;" ng-if="movies.Search.length > 0">Arama Sonuçları</h1>
+		<h1 class="page-title">Arama Sonuçları: <i>"{{keyword}}"</i></h1>
+		<div class="action-group">
+			<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		</div>
+		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
 				<div class="movie-item">
@@ -23,9 +20,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-6 col-sm-push-3" ng-if="movies.Response == 'False'">
+			<div class="col-xs-12 col-sm-12" ng-if="movies.Response == 'False'">
 				<div class="movie-item not-found txt-center">
-					<h3>Film bulunamadı :(</h3>
+					<h3 class="margin-bottom-0">Film bulunamadı :(</h3>
 				</div>
 			</div>
 		</div>

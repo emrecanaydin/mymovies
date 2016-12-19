@@ -1,7 +1,7 @@
 <div class="watch-list">
 	<h1 class="page-title">İzlenecekler Listem</h1>
 	<div class="action-group">
-		<a href class="btn btn-sm btn-default" back-button><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
 	</div>
 	<div class="clearfix"></div>
 	<div class="row">
@@ -22,7 +22,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12" ng-if="movieList.length == 0">
 			<div class="movie-item not-found txt-center">
-				<h3>İzlenecek listeniz boş, film aramak için <a href="#!/">tıklayın</a>!</h3>
+				<h3 class="margin-bottom-0">İzlenecek listeniz boş, film aramak için <a href="#!/">tıklayın</a>!</h3>
 			</div>
 		</div>
 	</div>

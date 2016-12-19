@@ -9,10 +9,10 @@ var Helpers ={
 	},
 	Preloader : {
 		open: function(){
-			document.body.className = "loading"
+			document.body.className += " loading";
 		},
 		close: function(){
-			document.querySelector('body').classList.remove('loading')
+			document.body.classList.remove('loading');
 		}
 	},
 	Modal: {
@@ -26,11 +26,10 @@ var Helpers ={
 		}
 	},
 	MobileMenu: function(){
-		var x = document.getElementById("topnav");
-		if (x.className === "topnav") {
-			x.className += " responsive";
-		} else {
-			x.className = "topnav";
+		if (document.body.classList.contains('mobile-menu-opened')) {
+			document.body.classList.remove('mobile-menu-opened');
+		}else{
+			document.body.className += " mobile-menu-opened";
 		}
 	}
 }
