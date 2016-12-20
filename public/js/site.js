@@ -1,4 +1,7 @@
 var Helpers ={
+	Site : {
+		siteName: "Filmlerim"
+	},
 	Api : {
 		getApiUrl:  "http://www.omdbapi.com/"
 	},

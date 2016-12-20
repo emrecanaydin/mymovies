@@ -25,7 +25,8 @@ mymovies.config(['$routeProvider',
 	}).
 	otherwise({
 		title: '404 Sayfa Bulunamadı',
-		templateUrl:'templates/404.html'
+		templateUrl:'templates/404.html',
+		controller: '404'
 	});
 }]);
 
@@ -64,19 +65,26 @@ mymovies.controller('mainCtrl', function($scope){
 	}
 });
 
-mymovies.controller('homePage', function($scope,$http) {
+mymovies.controller('homePage', function($scope,$http, SiteServices) {
 	$scope.runSearch = function() {
 		window.location.href = "#!/SearchMovie/" + document.getElementById("txtMovieName").value;
 	};
+	SiteServices.setPageTitle("Ana Sayfa");
 });
 
-mymovies.controller('searchResults', function($scope,$routeParams,$http) {
+mymovies.controller('404', function($scope,$http, SiteServices) {
+	SiteServices.setPageTitle("404 Sayfa Bulunamadı");
+});
+
+
+mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteServices) {
 	$scope.movies = [];
 	$scope.keyword = $routeParams.Keyword;
 	$scope.getSearchResults = function(pageindex) {
 		Helpers.Preloader.open();
 		$http.get(Helpers.Api.getApiUrl + "?s="+$scope.keyword+"&page="+ pageindex).then(function(result) {
 			$scope.movies = result.data;
+			SiteServices.setPageTitle("Arama Sonuçları: " + $scope.keyword);
 			Helpers.Preloader.close();
 		}, function(error) {
 			alert(error);
@@ -85,13 +93,14 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http) {
 	$scope.getSearchResults(1);
 });
 
-mymovies.controller('movieDetail', function($scope,$routeParams,$http) {
+mymovies.controller('movieDetail', function($scope,$routeParams,$http, $window, SiteServices) {
 	$scope.movieObject = [];
 	$scope.movieid = $routeParams.imdbID;
 	Helpers.Preloader.open();
 	$scope.getMovieDetail = function() {
 		$http.get(Helpers.Api.getApiUrl + "?i="+$scope.movieid+"&plot=short&r=json").then(function(result) {
 			$scope.movieObject = result.data;
+			SiteServices.setPageTitle($scope.movieObject.Title);
 			Helpers.Preloader.close();
 		}, function(error) {
 			alert(error);
@@ -100,44 +109,18 @@ mymovies.controller('movieDetail', function($scope,$routeParams,$http) {
 	$scope.getMovieDetail();
 });
 
-mymovies.controller('watchList', function($scope,$http) {
+mymovies.controller('watchList', function($scope,$http, SiteServices) {
 	$scope.movieList = [];
 	$scope.loadUserWatchList = function () {
 		$scope.movieList = Helpers.WatchList.get();
+		SiteServices.setPageTitle("İzleme Listeniz");
 	};
 	$scope.loadUserWatchList();
 });
 
-/*mymovies.directive( 'backButton', function() {
-    return {
-        restrict: 'A',
-        link: function( scope, element, attrs ) {
-            element.on( 'click', function () {
-                history.back();
-                scope.$apply();
-            } );
-        }
-    };
-} );*/
 
-/*
-mymovies.factory('Helpers', [ function() {
-	class helpers {
-		getApiUrl(){
-			return "http://www.omdbapi.com/";
-		}
-		preloader(willOpen){
-			willOpen == true ? document.body.className = "loading" : document.querySelector('body').classList.remove('loading');
-		}
-		openmodal(){
-			document.getElementById("modal-overlay").style["display"] = 'block';
-			document.getElementById("modal").style["display"] = 'block';
-		}
-		closemodal(){
-			document.getElementById("modal-overlay").style["display"] = "none";
-			document.getElementById("modal").style["display"] = "none";
-		}
-	}
-	let helperlist = new helpers();
-	return helperlist;
-}]);*/
+mymovies.service('SiteServices', function ($window) {
+    this.setPageTitle = function (title) {
+		$window.document.title = title + " | " + Helpers.Site.siteName;
+    };
+});
