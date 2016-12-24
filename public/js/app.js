@@ -4,38 +4,37 @@ mymovies.config(['$routeProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
 	when('/', {
-		title: 'Ana Sayfa',
 		templateUrl: 'templates/home-page.html',
 		controller: 'homePage'
 	}).
 	when('/SearchMovie/:Keyword', {
-		title: 'Arama Sonuçları',
 		templateUrl: 'templates/search-results.html',
 		controller: 'searchResults'
 	}).
 	when('/MovieDetail/:imdbID', {
-		title: 'Film Detay',
 		templateUrl: 'templates/movie-detail.html',
 		controller: 'movieDetail'
 	}).
 	when('/WatchList/', {
-		title: 'İzlenecekler Listem',
 		templateUrl: 'templates/watch-list.html',
 		controller: 'watchList'
 	}).
 	otherwise({
-		title: '404 Sayfa Bulunamadı',
 		templateUrl:'templates/404.html',
 		controller: '404'
 	});
+		
 }]);
 
-mymovies.controller('mainCtrl', function($scope){
+mymovies.controller('mainCtrl', function($scope, SiteServices){
+		
+	$scope.Helpers = SiteServices;
+	
 	$scope.goPreviousPage = function() {
 		window.history.back();
 	};
 	$scope.AddWatchList = function(movie){
-		var watchlist = Helpers.WatchList.get();
+		var watchlist = SiteServices.WatchList.get();
 		newmovieitem = {
 			"Title": movie.Title,
 			"Year": movie.Year,
@@ -44,19 +43,19 @@ mymovies.controller('mainCtrl', function($scope){
 		};
 		watchlist.push(newmovieitem);
 		localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
-		swal({title: "Tamamdır!",text: "Film, izlenecekler listenize eklendi.",timer: 900,showConfirmButton: false});
+		swal({title: "Success!",text: "Movie added your watchlist.",timer: 900,showConfirmButton: false});
 	}
 	$scope.RemoveMovieWatchList = function(movie){
-		var watchlist = Helpers.WatchList.get();
+		var watchlist = SiteServices.WatchList.get();
 		watchlist = _.without(watchlist, _.findWhere(watchlist, {
 		  imdbID: movie.imdbID
 		}));
 		localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
-		swal({title: "Tamamdır!",text: "Film, izlenecekler listenizden çıkartıldı.",timer: 900,showConfirmButton: false});
+		swal({title: "Success!",text: "Movie removed from your watchlist.",timer: 900,showConfirmButton: false});
 	}
 	$scope.CheckWatchList = function(movieId){
 		var isMovieWatchList = false;
-		if( _.findWhere(Helpers.WatchList.get(), {imdbID: movieId}) ){
+		if( _.findWhere(SiteServices.WatchList.get(), {imdbID: movieId}) ){
 			isMovieWatchList = true;
 		}else{
 			isMovieWatchList = false;
@@ -69,11 +68,11 @@ mymovies.controller('homePage', function($scope,$http, SiteServices) {
 	$scope.runSearch = function() {
 		window.location.href = "#!/SearchMovie/" + document.getElementById("txtMovieName").value;
 	};
-	SiteServices.setPageTitle("Ana Sayfa");
+	SiteServices.setPageTitle("Home Page");
 });
 
 mymovies.controller('404', function($scope,$http, SiteServices) {
-	SiteServices.setPageTitle("404 Sayfa Bulunamadı");
+	SiteServices.setPageTitle("404 Page Not Found");
 });
 
 
@@ -81,14 +80,27 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteSer
 	$scope.movies = [];
 	$scope.keyword = $routeParams.Keyword;
 	$scope.getSearchResults = function(pageindex) {
-		Helpers.Preloader.open();
-		$http.get(Helpers.Api.getApiUrl + "?s="+$scope.keyword+"&page="+ pageindex).then(function(result) {
+		SiteServices.Preloader.open();
+		$http.get(SiteServices.Api.getApiUrl + "?s="+$scope.keyword+"&page="+ pageindex).then(function(result) {
+			//return search result
 			$scope.movies = result.data;
-			SiteServices.setPageTitle("Arama Sonuçları: " + $scope.keyword);
-			Helpers.Preloader.close();
+			//crete pager
+			$scope.pagerArray = [];
+			$scope.pagerLength = Math.round($scope.movies.totalResults / 8);
+			for (i = 0; i < $scope.pagerLength; i++){
+				var pagerItem = {
+					number: i,
+					isActive: i == pageindex -1
+				}
+				$scope.pagerArray.push(pagerItem);
+			}
+			SiteServices.setPageTitle("Search Results: " + $scope.keyword);
+			SiteServices.Preloader.close();
+			SiteServices.Site.scrollTop(500);
 		}, function(error) {
 			alert(error);
 		});
+
 	};
 	$scope.getSearchResults(1);
 });
@@ -96,31 +108,75 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteSer
 mymovies.controller('movieDetail', function($scope,$routeParams,$http, $window, SiteServices) {
 	$scope.movieObject = [];
 	$scope.movieid = $routeParams.imdbID;
-	Helpers.Preloader.open();
+	SiteServices.Preloader.open();
 	$scope.getMovieDetail = function() {
-		$http.get(Helpers.Api.getApiUrl + "?i="+$scope.movieid+"&plot=short&r=json").then(function(result) {
+		$http.get(SiteServices.Api.getApiUrl + "?i="+$scope.movieid+"&plot=short&r=json").then(function(result) {
 			$scope.movieObject = result.data;
 			SiteServices.setPageTitle($scope.movieObject.Title);
-			Helpers.Preloader.close();
+			SiteServices.Preloader.close();
 		}, function(error) {
 			alert(error);
 		});
-	};
+	}; 
 	$scope.getMovieDetail();
 });
 
 mymovies.controller('watchList', function($scope,$http, SiteServices) {
 	$scope.movieList = [];
 	$scope.loadUserWatchList = function () {
-		$scope.movieList = Helpers.WatchList.get();
-		SiteServices.setPageTitle("İzleme Listeniz");
+		$scope.movieList = SiteServices.WatchList.get();
+		SiteServices.setPageTitle("My Watchlist");
 	};
 	$scope.loadUserWatchList();
 });
 
-
 mymovies.service('SiteServices', function ($window) {
+	this.Site = {
+		scrollTop: function(duration){
+			var scrollStep = -window.scrollY / (duration / 15),
+				scrollInterval = setInterval(function(){
+				if ( window.scrollY != 0 ) {
+					window.scrollBy( 0, scrollStep );
+				}
+				else clearInterval(scrollInterval); 
+			},15);
+		},
+		siteName:"Movie Collector"
+	};
     this.setPageTitle = function (title) {
-		$window.document.title = title + " | " + Helpers.Site.siteName;
+		$window.document.title = title + " | " + this.Site.siteName;
     };
+	this.Api = {
+		getApiUrl:  "http://www.omdbapi.com/"
+	};
+	this.WatchList = {
+		get:  function(){
+			return localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+		}
+	};
+	this.Preloader = {
+		open: function(){
+			document.body.className += " loading";
+		},
+		close: function(){
+			document.body.classList.remove('loading');
+		}
+	};
+	this.Modal = {
+		open: function(){
+			document.getElementById("modal-overlay").style["display"] = 'block';
+			document.getElementById("modal").style["display"] = 'block';
+		},
+		close: function(){
+			document.getElementById("modal-overlay").style["display"] = "none";
+			document.getElementById("modal").style["display"] = "none";
+		}
+	};
+	this.MobileMenu = function(){
+		if (document.body.classList.contains('mobile-menu-opened')) {
+			document.body.classList.remove('mobile-menu-opened');
+		}else{
+			document.body.className += " mobile-menu-opened";
+		}
+	};
 });

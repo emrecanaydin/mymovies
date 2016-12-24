@@ -1,28 +1,28 @@
 <div class="watch-list">
-	<h1 class="page-title">İzlenecekler Listem</h1>
+	<h1 class="page-title">My Watch List</h1>
 	<div class="action-group">
-		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
+		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Back</a>
 	</div>
 	<div class="clearfix"></div>
-	<div class="row">
+	<div class="row movie-list">
 		<div class="col-xs-12 col-sm-6" ng-repeat="item in movieList">
 			<div class="movie-item">
 				<div class="row">
-					<div class="col-sm-2 movie-image">
-						<img alt="{{item.Title}}" ng-src="{{item.Poster}}" style="width: 100%" />
+					<div class="movie-image col-sm-2 col-xs-12" ng-if="item.Poster != 'N/A'">
+						<img alt="{{item.Title}}" ng-src="{{item.Poster}}" />
 					</div>
-					<div class="col-sm-10">
-						<h3>{{item.Title}}</h3>
+					<div class="movie-content col-sm-10 col-xs-12">
+						<h3 class="movie-title">{{item.Title}}</h3>
 						<h4>{{item.Year}}</h4>
-						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
-						<a href="javascript:;" ng-click="RemoveMovieWatchList(item); loadUserWatchList();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> İzleme Listemden Çıkar</a>
+						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Movie Detail</a>
+						<a href="javascript:;" ng-click="RemoveMovieWatchList(item); loadUserWatchList();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12" ng-if="movieList.length == 0">
 			<div class="movie-item not-found txt-center">
-				<h3 class="margin-bottom-0">İzlenecek listeniz boş, film aramak için <a href="#!/">tıklayın</a>!</h3>
+				<h3 class="margin-bottom-0">Your watch list is completly empty, <a href="#!/">click here</a> to search movies!</h3>
 			</div>
 		</div>
 	</div>

@@ -1,30 +1,37 @@
 <div class="search-movie">
-	<div class="results-area">
-		<h1 class="page-title">Arama Sonuçları: <i>"{{keyword}}"</i></h1>
-		<div class="action-group">
-			<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
-		</div>
-		<div class="clearfix"></div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
-				<div class="movie-item">
-					<div class="row">
-						<div class="movie-image col-sm-2 col-xs-12" ng-if="item.Poster != 'N/A'"><img alt="{{item.Title}}" ng-src="{{item.Poster}}" /></div>
-						<div class="movie-content col-sm-10 col-xs-12">
-							<h3 class="movie-title">{{item.Title}}</h3>
-							<h4>{{item.Year}}</h4>
-							<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Film Detay</a>
-							<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == false" ng-click="AddWatchList(item)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
-							<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == true"  ng-click="RemoveMovieWatchList(item);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> İzleme Listemden Çıkar</a>
-						</div>
+	<h1 class="page-title">Search Results: <i>"{{keyword}}"</i></h1>
+	<div class="action-group">
+		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Back</a>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row movie-list">
+		<div class="col-xs-12 col-sm-6" ng-repeat="item in movies.Search">
+			<div class="movie-item">
+				<div class="row">
+					<div class="movie-image col-sm-2 col-xs-12" ng-if="item.Poster != 'N/A'">
+						<img alt="{{item.Title}}" ng-src="{{item.Poster}}" />
+					</div>
+					<div class="movie-content col-sm-10 col-xs-12">
+						<h3 class="movie-title">{{item.Title}}</h3>
+						<h4>{{item.Year}}</h4>
+						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Movie Detail</a>
+						<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == false" ng-click="AddWatchList(item)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Add To My Watchlist</a>
+						<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == true"  ng-click="RemoveMovieWatchList(item);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12" ng-if="movies.Response == 'False'">
-				<div class="movie-item not-found txt-center">
-					<h3 class="margin-bottom-0">Film bulunamadı :(</h3>
-				</div>
+		</div>
+		<div class="col-xs-12 col-sm-12" ng-if="movies.Response == 'False'">
+			<div class="movie-item not-found txt-center">
+				<h3 class="margin-bottom-0">Sorry, no result found :(</h3>
 			</div>
 		</div>
-	</div>	
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="pagination pull-right" id="search-paginition">
+				<li ng-repeat="pagerItem in pagerArray|limitTo:10" ng-class="{ 'active': pagerItem.isActive }"><a href="" ng-click="getSearchResults(pagerItem.number+1)">{{pagerItem.number+1}}</a></li>
+			</ul>
+		</div>
+	</div>
 </div>

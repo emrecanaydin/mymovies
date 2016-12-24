@@ -1,5 +1,6 @@
 body{
 	background: url(../img/bg.jpg) no-repeat center top;
+	background-size: cover;
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -9,6 +10,10 @@ body{
 
 .non-float{
 	float: none !important;
+}
+
+.pr{
+	position: relative;
 }
 
 .margin-bottom-0{
@@ -184,8 +189,6 @@ h3, h4{
 	top: 29px;
 }
 
-
-
 /* common styles */
 
 .content{
@@ -225,7 +228,28 @@ h3, h4{
 	position: relative;
 	margin-bottom: 45px;
 }
-.search-movie input{
+.search-movie .information-bubble {
+	position:relative;
+	padding:15px;
+	margin-top:10px;
+	color:#000;
+	background:#fff;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+
+.search-movie .information-bubble:after {
+	content:"";
+	position:absolute;
+	top:-29px;
+	left:50px;
+	border:15px solid transparent;
+	border-bottom-color:#fff;
+	display:block;
+	width:0;
+}
+.search-movie .txt-keyword{
     height: 60px;
     border-radius: 30px;
     padding: 8px 30px;
@@ -244,7 +268,10 @@ h3, h4{
 	border-radius: 30px;
 	outline: none !important;
 }
-.search-movie .results-area .movie-item{
+
+/* movie list (search - watchlist) */
+
+.content .movie-list .movie-item{
 	background: white;
 	padding: 20px;
 	margin-bottom: 30px;
@@ -252,30 +279,17 @@ h3, h4{
 	height: 130px;
 }
 
-.search-movie .results-area .movie-item .movie-image img{
+.content .movie-list .movie-item .movie-image img{
 	width: 100%;
 }
-.search-movie .results-area .movie-item .movie-content .movie-title{
+.content .movie-list .movie-item .movie-content .movie-title{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	line-height: 120%;
 }
 
-.search-movie .results-area .movie-item.not-found{
-	height: auto;
-}
-
-/* watch list */
-
-.watch-list .movie-item{
-	background: white;
-	padding: 20px;
-	margin-bottom: 30px;
-	border-radius: 6px;
-	height: 130px;
-}
-
-.watch-list .movie-item.not-found{
+.content .movie-list .movie-item.not-found{
 	height: auto;
 }
 
@@ -290,15 +304,12 @@ h3, h4{
     margin-bottom: 30px;
 }
 
-
-
-
 @media screen and (max-width:767px) {
 	.content{
 		margin-top: 40px;
 	}
 	.content h1.page-title{
-		font-size: 29px;
+		font-size: 23px;
 		float: none;
 		margin-bottom: 15px;
 	}
@@ -307,13 +318,10 @@ h3, h4{
 		margin-top: 0;
 		margin-bottom: 15px;
 	}
-	.movie-detail .movie-image, .watch-list .movie-image, .search-movie .results-area .movie-item .movie-image{
+	.content .movie-list .movie-detail .movie-image{
 		margin-bottom: 15px;
 	}
-	.watch-list .movie-item{
-		height: auto;
-	}
-	.search-movie .results-area .movie-item{
+	.content .movie-list .movie-item{
 		height: auto;
 	}
 	.topnav{

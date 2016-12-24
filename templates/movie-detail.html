@@ -1,9 +1,9 @@
 <div class="movie-detail">
-	<h1 class="page-title">Film Detay</h1>
+	<h1 class="page-title">Movie Detail</h1>
 	<div class="action-group">
-		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Geri Dön</a>
-		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == false" ng-click="AddWatchList(movieObject); getMovieDetail();" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> İzleme Listeme Ekle</a>
-		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == true"  ng-click="RemoveMovieWatchList(movieObject); getMovieDetail();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> İzleme Listemden Çıkar</a>
+		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Back</a>
+		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == false" ng-click="AddWatchList(movieObject); getMovieDetail();" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Add To My Watchlist</a>
+		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == true"  ng-click="RemoveMovieWatchList(movieObject); getMovieDetail();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
 	</div>
 	<div class="clearfix"></div>
 	<div class="white-inner-content">
@@ -13,20 +13,20 @@
 			</div>
 			<div class="col-xs-12 col-sm-9">
 				<h3>{{movieObject.Title}}</h3>
-				<p><strong>IMDD Puanı: </strong> {{movieObject.imdbRating}}</p>
-				<p><strong>Yıl: </strong> {{movieObject.Year}}</p>
-				<p><strong>Tür: </strong> {{movieObject.Genre}}</p>
-				<p><strong>Yönetmen: </strong> {{movieObject.Director}}</p>
-				<p><strong>Senarist: </strong> {{movieObject.Writer}}</p>
-				<p><strong>Oyuncular: </strong> {{movieObject.Actors}}</p>
-				<p><strong>Süre: </strong> {{movieObject.Runtime}}</p>
-				<p><strong>Ülke: </strong> {{movieObject.Country}}</p>
+				<p><strong>IMDD Rating: </strong> {{movieObject.imdbRating}}</p>
+				<p><strong>Year: </strong> {{movieObject.Year}}</p>
+				<p><strong>Genre: </strong> {{movieObject.Genre}}</p>
+				<p><strong>Director: </strong> {{movieObject.Director}}</p>
+				<p><strong>Scenarist: </strong> {{movieObject.Writer}}</p>
+				<p><strong>Actors: </strong> {{movieObject.Actors}}</p>
+				<p><strong>Runtime: </strong> {{movieObject.Runtime}}</p>
+				<p><strong>Country: </strong> {{movieObject.Country}}</p>
 			</div>
 		</div>
 		<div class="row" ng-if="movieObject.Response == 'False'">
 			<div class="col-xs-12 col-sm-6 col-sm-push-3" >
 				<div class="movie-item not-found txt-center">
-					<h3>Houston, sorunumuz var :(</h3>
+					<h3>Houston, we have a problem :(</h3>
 				</div>
 			</div>
 		</div>
