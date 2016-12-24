@@ -7,7 +7,7 @@ mymovies.config(['$routeProvider',
 		templateUrl: 'templates/home-page.html',
 		controller: 'homePage'
 	}).
-	when('/SearchMovie/:Keyword', {
+	when('/SearchMovie/:Keyword/Page/:Index', {
 		templateUrl: 'templates/search-results.html',
 		controller: 'searchResults'
 	}).
@@ -66,7 +66,7 @@ mymovies.controller('mainCtrl', function($scope, SiteServices){
 
 mymovies.controller('homePage', function($scope,$http, SiteServices) {
 	$scope.runSearch = function() {
-		window.location.href = "#!/SearchMovie/" + document.getElementById("txtMovieName").value;
+		window.location.href = "#!/SearchMovie/" + document.getElementById("txtMovieName").value + "/Page/1";
 	};
 	SiteServices.setPageTitle("Home Page");
 });
@@ -79,9 +79,10 @@ mymovies.controller('404', function($scope,$http, SiteServices) {
 mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteServices) {
 	$scope.movies = [];
 	$scope.keyword = $routeParams.Keyword;
-	$scope.getSearchResults = function(pageindex) {
+	$scope.index = $routeParams.Index;
+	$scope.getSearchResults = function() {
 		SiteServices.Preloader.open();
-		$http.get(SiteServices.Api.getApiUrl + "?s="+$scope.keyword+"&page="+ pageindex).then(function(result) {
+		$http.get(SiteServices.Api.getApiUrl + "?s="+$scope.keyword+"&page="+ $scope.index).then(function(result) {
 			//return search result
 			$scope.movies = result.data;
 			//crete pager
@@ -90,7 +91,7 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteSer
 			for (i = 0; i < $scope.pagerLength; i++){
 				var pagerItem = {
 					number: i,
-					isActive: i == pageindex -1
+					isActive: i == $scope.index -1
 				}
 				$scope.pagerArray.push(pagerItem);
 			}
@@ -105,7 +106,7 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteSer
 	$scope.getSearchResults(1);
 });
 
-mymovies.controller('movieDetail', function($scope,$routeParams,$http, $window, SiteServices) {
+mymovies.controller('movieDetail', function($scope,$routeParams,$http, SiteServices) {
 	$scope.movieObject = [];
 	$scope.movieid = $routeParams.imdbID;
 	SiteServices.Preloader.open();
