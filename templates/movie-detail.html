@@ -1,18 +1,18 @@
 <div class="movie-detail">
-	<h1 class="page-title">Movie Detail</h1>
+	<h1 class="page-title">{{movieObject.Title}}</h1>
 	<div class="action-group">
 		<a href class="btn btn-sm btn-default" ng-click="goPreviousPage()"><span class="glyphicon glyphicon-triangle-left"></span> Back</a>
-		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == false" ng-click="AddWatchList(movieObject); getMovieDetail();" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Add To My Watchlist</a>
-		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == true"  ng-click="RemoveMovieWatchList(movieObject); getMovieDetail();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
+		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == false" ng-click="AddWatchList(movieObject); getMovieDetail();" class="btn btn-success btn-sm btn-watchlist"><span class="glyphicon glyphicon-star"></span> Add To My Watchlist</a>
+		<a href="javascript:;" ng-if="CheckWatchList(movieObject.imdbID) == true"  ng-click="RemoveMovieWatchList(movieObject); getMovieDetail();" class="btn btn-sm btn-danger btn-watchlist"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
 	</div>
 	<div class="clearfix"></div>
 	<div class="white-inner-content">
 		<div class="row" ng-if="movieObject.Response == 'True'">
-			<div class="col-xs-12 col-sm-3 movie-image" ng-if="movieObject.Poster != 'N/A'">
+			<div class="movie-image col-xs-12 col-sm-3" ng-if="movieObject.Poster != 'N/A'">
 				<img alt="{{movieObject.Title}}" ng-src="{{movieObject.Poster}}" style="width:100%" />
 			</div>
-			<div class="col-xs-12 col-sm-9">
-				<h3>{{movieObject.Title}}</h3>
+			<div class="movie-content col-xs-12 col-sm-9">
+				<h3 class="margin-bottom-10">{{movieObject.Plot}}</h3>
 				<p><strong>IMDD Rating: </strong> {{movieObject.imdbRating}}</p>
 				<p><strong>Year: </strong> {{movieObject.Year}}</p>
 				<p><strong>Genre: </strong> {{movieObject.Genre}}</p>

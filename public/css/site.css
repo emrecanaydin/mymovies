@@ -1,5 +1,5 @@
 body{
-	background: url(../img/bg.jpg) no-repeat center top;
+	background: url(../img/bg-desktop.jpg) #2d2d2d no-repeat center top;
 	background-size: cover;
 	font-family: 'Source Sans Pro', sans-serif;
 }
@@ -18,6 +18,10 @@ body{
 
 .margin-bottom-0{
 	margin-bottom: 0px;
+}
+
+.margin-bottom-10{
+	margin-bottom: 10px !important;
 }
 
 h3, h4{
@@ -68,11 +72,21 @@ h3, h4{
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: rgba(51,51,51,0.4);
+	background-color: rgba(255,255,255,0.1);
 	text-align: center;
 }
 
-.topnav a {
+.topnav .site-name{
+	display: none;
+	color: #f2f2f2;
+	padding: 12px 15px;
+	text-decoration: none;
+	transition: 0.3s;
+	font-size: 17px;
+	margin-top: 5px;
+}
+
+.topnav .menu-list a {
 	display: inline-block;
 	color: #f2f2f2;
 	text-align: center;
@@ -82,112 +96,67 @@ h3, h4{
 	font-size: 17px;
 }
 
-.topnav a:hover {
-	background-color: rgba(51,51,51,0.5);
+.topnav .menu-list a:hover {
+	background-color: rgba(255,255,255,0.2);
 }
 
 .topnav .hamburger-menu {
-	width: 60px;
-	height: 45px;
+	width: 22px;
+	height: 22px;
+	margin-right: 15px;
 	position: relative;
-	-webkit-transform: rotate(0deg);
-	-moz-transform: rotate(0deg);
-	-o-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-webkit-transition: .5s ease-in-out;
-	-moz-transition: .5s ease-in-out;
-	-o-transition: .5s ease-in-out;
-	transition: .5s ease-in-out;
-	cursor: pointer;tion: .25s ease-in-out;
-	-moz-transform: scale(0.2);
-	-webkit-transform: scale(0.2);
-	transform: scale(0.2);
-	margin-top: 5px;
+	cursor: pointer;
+	padding: 26px 0px;
 	display: none;
 }
 
 .topnav .hamburger-menu span{
-	display: block;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 	position: absolute;
-	height: 4px;
-	width: 100%;
-	background: #ffffff;
-	opacity: 1;
 	left: 0;
-	-webkit-transform: rotate(0deg);
-	-moz-transform: rotate(0deg);
-	-o-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-webkit-transition: .25s ease-in-out;
-	-moz-transition: .25s ease-in-out;
-	-o-transition: .25s ease-in-out;
-	transition: .25s ease-in-out;
+	border-top: 1px solid white;
+	width: 100%;
+	-webkit-transition: 0.55s;
+	transition: 0.55s;
 }
 
-
-.topnav .hamburger-menu span:nth-child(even) {
-	left: 50%;
-}
-
-.topnav .hamburger-menu span:nth-child(odd) {
-	left:0px;
-}
-
-.topnav .hamburger-menu span:nth-child(1), .topnav .hamburger-menu span:nth-child(2) {
-	top: 0px;
-}
-
-.topnav .hamburger-menu span:nth-child(3), .topnav .hamburger-menu span:nth-child(4) {
+.topnav .hamburger-menu span.top{
 	top: 23px;
 }
 
-.topnav .hamburger-menu span:nth-child(5), .topnav .hamburger-menu span:nth-child(6) {
-	top: 46px;
+.topnav .hamburger-menu span.middle{
+	top: 28px;
 }
 
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(1), .mobile-menu-opened .topnav .hamburger-menu span:nth-child(6) {
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	transform: rotate(45deg);
+.topnav .hamburger-menu span.bottom{
+	top: 33px;
 }
 
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(2), .mobile-menu-opened .topnav .hamburger-menu span:nth-child(5) {
-	-webkit-transform: rotate(-45deg);
-	-moz-transform: rotate(-45deg);
-	-o-transform: rotate(-45deg);
-	transform: rotate(-45deg);
+.mobile-menu-opened .hamburger-menu span.top{
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	top: 26px;
+	-webkit-transform: rotate(50deg);
+	transform: rotate(50deg);
+	-webkit-transition: 0.55s 0.5s;
+	transition: 0.55s 0.5s;
 }
 
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(1) {
-	left: 5px;
-	top: 7px;
+.mobile-menu-opened .hamburger-menu span.middle{
+    opacity: 0;
 }
 
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(2) {
-	left: calc(50% - 5px);
-	top: 7px;
+.mobile-menu-opened .hamburger-menu span.bottom{
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	top: 26px;
+	-webkit-transform: rotate(-410deg);
+	transform: rotate(-410deg);
+	-webkit-transition: 0.55s 0.5s;
+	transition: 0.55s 0.5s;
 }
 
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(3) {
-	left: -50%;
-	opacity: 0;
-}
-
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(4) {
-	left: 100%;
-	opacity: 0;
-}
-
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(5) {
-	left: 5px;
-	top: 29px;
-}
-
-.mobile-menu-opened .topnav .hamburger-menu span:nth-child(6) {
-	left: calc(50% - 5px);
-	top: 29px;
-}
 
 /* common styles */
 
@@ -281,6 +250,7 @@ h3, h4{
 
 .content .movie-list .movie-item .movie-image img{
 	width: 100%;
+	max-height: 90px;
 }
 .content .movie-list .movie-item .movie-content .movie-title{
 	white-space: nowrap;
@@ -288,7 +258,6 @@ h3, h4{
 	text-overflow: ellipsis;
 	line-height: 120%;
 }
-
 .content .movie-list .movie-item.not-found{
 	height: auto;
 }
@@ -304,7 +273,18 @@ h3, h4{
     margin-bottom: 30px;
 }
 
+/* mobile devices */
+
 @media screen and (max-width:767px) {
+	body{
+		background: url(../img/bg-mobile.jpg) black no-repeat center top;
+	}
+	.search-movie .txt-keyword{
+		font-size: 16px;
+	}
+	.search-movie .btn-getmovies{
+		font-size: 15px;
+	}
 	.content{
 		margin-top: 40px;
 	}
@@ -318,17 +298,44 @@ h3, h4{
 		margin-top: 0;
 		margin-bottom: 15px;
 	}
-	.content .movie-list .movie-detail .movie-image{
-		margin-bottom: 15px;
+	.content .action-group .btn{
+		margin-left: 0px;
+	}
+	.content .movie-image{
+		margin-bottom: 10px;
 	}
 	.content .movie-list .movie-item{
 		height: auto;
 	}
+	.content .movie-list .movie-item .movie-image img{
+		max-height: none;
+	}
+	.content .movie-list .movie-item .movie-content .btn-watchlist{
+		display: block;
+	}
+	.content .movie-list .movie-item .movie-content .btn-movie-detail{
+		display: block;
+		margin-bottom: 10px;
+	}
 	.topnav{
 		text-align: left;
 	}
-	.topnav a:not(:first-child) {
+	.topnav .site-name{
+		display: inline-block;
+	}
+	.topnav .menu-list{
+		transition: opacity .6s ease-out;
+		opacity: 0;
+		height: 0;
+		overflow: hidden;
+		border-top: 1px solid rgba(255, 255, 255, .5);
+	}
+	.topnav .menu-list .homepage{
 		display: none;
+	}
+	.mobile-menu-opened .topnav .menu-list{
+		opacity: 1;
+		height: auto;
 	}
 	.topnav .hamburger-menu {
 		float: right;
@@ -349,5 +356,14 @@ h3, h4{
 		float: none;
 		display: block;
 		text-align: left;
+	}
+}
+
+/* ipad portrait */
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+	.content .movie-list .movie-item .movie-content .btn-movie-detail,
+	.content .movie-list .movie-item .movie-content .btn-watchlist{
+		font-size: 9px;
 	}
 }

@@ -14,9 +14,9 @@
 					<div class="movie-content col-sm-10 col-xs-12">
 						<h3 class="movie-title">{{item.Title}}</h3>
 						<h4>{{item.Year}}</h4>
-						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Movie Detail</a>
-						<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == false" ng-click="AddWatchList(item)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-star"></span> Add To My Watchlist</a>
-						<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == true"  ng-click="RemoveMovieWatchList(item);" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
+						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm btn-movie-detail"><span class="glyphicon glyphicon-film"></span> Movie Detail</a>
+						<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == false" ng-click="AddWatchList(item)" class="btn btn-success btn-sm btn-watchlist"><span class="glyphicon glyphicon-star"></span> Add To My Watchlist</a>
+						<a href="javascript:;" ng-if="CheckWatchList(item.imdbID) == true"  ng-click="RemoveMovieWatchList(item);" class="btn btn-sm btn-danger btn-watchlist"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
 					</div>
 				</div>
 			</div>
@@ -30,7 +30,19 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ul class="pagination pull-right" id="search-paginition">
-				<li ng-repeat="pagerItem in pagerArray|limitTo:10" ng-class="{ 'active': pagerItem.isActive }"><a href="#!/SearchMovie/{{keyword}}/Page/{{pagerItem.number+1}}">{{pagerItem.number+1}}</a></li>
+				<li ng-class="{ 'disabled': pagerArray.pagerInfo.isFirstIndex }">
+					<a ng-href="" ng-show="pagerArray.pagerInfo.isFirstIndex">&laquo;</a>
+					<a ng-href="#!/SearchMovie/{{keyword}}/Page/{{pagerArray.pagerInfo.prevIndex}}" ng-show="!pagerArray.pagerInfo.isFirstIndex">&laquo;</a>
+				</li>
+				<li ng-repeat="item in pagerArray.pagerItems|limitTo:10" ng-class="{ 'active': item.isActive }">
+					<a ng-href="#!/SearchMovie/{{keyword}}/Page/{{item.number+1}}">
+						{{item.number+1}}
+					</a>
+				</li>
+				<li ng-class="{ 'disabled': pagerArray.pagerInfo.isLastIndex }">
+					<a ng-href="" ng-show="pagerArray.pagerInfo.isLastIndex">&raquo;</a>
+					<a ng-href="#!/SearchMovie/{{keyword}}/Page/{{pagerArray.pagerInfo.nextIndex}}" ng-show="!pagerArray.pagerInfo.isLastIndex">&raquo;</a>
+				</li>
 			</ul>
 		</div>
 	</div>

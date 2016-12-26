@@ -8,14 +8,14 @@
 		<div class="col-xs-12 col-sm-6" ng-repeat="item in movieList">
 			<div class="movie-item">
 				<div class="row">
-					<div class="movie-image col-sm-2 col-xs-12" ng-if="item.Poster != 'N/A'">
+					<div class="movie-image col-sm-3 col-md-2 col-xs-12" ng-if="item.Poster != 'N/A'">
 						<img alt="{{item.Title}}" ng-src="{{item.Poster}}" />
 					</div>
-					<div class="movie-content col-sm-10 col-xs-12">
+					<div class="movie-content col-sm-9 col-md-10 col-xs-12">
 						<h3 class="movie-title">{{item.Title}}</h3>
 						<h4>{{item.Year}}</h4>
-						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-film"></span> Movie Detail</a>
-						<a href="javascript:;" ng-click="RemoveMovieWatchList(item); loadUserWatchList();" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
+						<a href="#!/MovieDetail/{{item.imdbID}}" class="btn btn-primary btn-sm btn-movie-detail"><span class="glyphicon glyphicon-film"></span> Movie Detail</a>
+						<a href="javascript:;" ng-click="RemoveMovieWatchList(item); loadUserWatchList();" class="btn btn-sm btn-danger btn-watchlist"><span class="glyphicon glyphicon-star-empty"></span> Remove From My Watchlist</a>
 					</div>
 				</div>
 			</div>

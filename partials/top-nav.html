@@ -1,13 +1,13 @@
 <div class="topnav" id="topnav">
-	<a href="#!/">Home Page</a>
-	<a href="#!/WatchList">My Watchlist</a>
-	<a href="#!/Contact">Contact</a>
-	<div class="hamburger-menu" ng-click="Helpers.MobileMenu()">
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
+	<div class="hamburger-menu" ng-click="Helpers.MobileMenu.run()">
+		<span class="top"></span>
+		<span class="middle"></span>
+		<span class="bottom"></span>
+	</div>
+	<a class="site-name" ng-href="#!/"><span class="glyphicon glyphicon-home"></span></a>
+	<div class="menu-list">
+		<a ng-href="#!/" class="homepage">Home Page</a>
+		<a ng-href="#!/WatchList" class="watchlist">My Watchlist</a>
+		<a ng-href="#!/Contact" class="contact">Contact</a>
 	</div>
 </div>
