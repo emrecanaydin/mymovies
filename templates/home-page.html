@@ -2,14 +2,11 @@
 	<form name="searchmovie" ng-submit="searchmovie.$valid && runSearch()" novalidate>
 		<div class="search-area">
 			<label>Hello there :) Archive movies, create your watch list and share with others!</label>
-
 			<div class="form-group pr">
 				<input type="txtMovieName" class="form-control txt-keyword" id="txtMovieName" name="txtMovieName" placeholder="Example: Mad Max" ng-minlength="3" ng-model="keyword" required />
 				<input type="submit" id="btn-searchmovie" class="btn btn-primary btn-lg btn-getmovies" value="Let's Search" />
 			</div>
 			<div class="information-bubble col-sm-5 col-xs-12" ng-show="searchmovie.txtMovieName.$error.minlength">Please enter minimum 3 chars.</div>
 		</div>
-		
-		
 	</form>
 </div>

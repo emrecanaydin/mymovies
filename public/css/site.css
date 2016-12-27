@@ -76,7 +76,7 @@ h3, h4{
 	text-align: center;
 }
 
-.topnav .site-name{
+.topnav .home-page-mobile{
 	display: none;
 	color: #f2f2f2;
 	padding: 12px 15px;
@@ -301,26 +301,35 @@ h3, h4{
 	.content .action-group .btn{
 		margin-left: 0px;
 	}
-	.content .movie-image{
+	.content .movie-detail .movie-image{
 		margin-bottom: 10px;
 	}
 	.content .movie-list .movie-item{
 		height: auto;
+		padding: 15px;
 	}
 	.content .movie-list .movie-item .movie-image img{
 		max-height: none;
 	}
+	.content .movie-list .movie-item .movie-content .movie-title{
+		white-space: normal;
+	}
+	.content .movie-list .movie-item .movie-content.with-poster {
+		padding-left: 0px;
+	}
 	.content .movie-list .movie-item .movie-content .btn-watchlist{
 		display: block;
+		font-size: 11px;
 	}
 	.content .movie-list .movie-item .movie-content .btn-movie-detail{
 		display: block;
+		font-size: 11px;
 		margin-bottom: 10px;
 	}
 	.topnav{
 		text-align: left;
 	}
-	.topnav .site-name{
+	.topnav .home-page-mobile{
 		display: inline-block;
 	}
 	.topnav .menu-list{

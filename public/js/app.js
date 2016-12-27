@@ -26,14 +26,7 @@ mymovies.config(['$routeProvider',
 }]);
 
 mymovies.controller('mainCtrl', function($scope, SiteServices){
-	
-	$scope.authList = [
-		{
-		  modelName:"createdAuthValue.sumList",
-		  modelText: "Sistem Özeti Okuma",
-		  status   : false
-		}
-	];
+
 		
 	$scope.Helpers = SiteServices;
 	
@@ -41,9 +34,8 @@ mymovies.controller('mainCtrl', function($scope, SiteServices){
 	
 	$scope.$on('$routeChangeStart', function(next, current) { 
 		SiteServices.MobileMenu.close();
-	 });
+	});
 	 
-	
 	$scope.goPreviousPage = function() {
 		window.history.back();
 	};
