@@ -252,6 +252,9 @@ h3, h4{
 	width: 100%;
 	max-height: 90px;
 }
+.content .movie-list .movie-item .movie-content.with-poster {
+	padding-left: 0px;
+}
 .content .movie-list .movie-item .movie-content .movie-title{
 	white-space: nowrap;
 	overflow: hidden;
@@ -313,9 +316,6 @@ h3, h4{
 	}
 	.content .movie-list .movie-item .movie-content .movie-title{
 		white-space: normal;
-	}
-	.content .movie-list .movie-item .movie-content.with-poster {
-		padding-left: 0px;
 	}
 	.content .movie-list .movie-item .movie-content .btn-watchlist{
 		display: block;

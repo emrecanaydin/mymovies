@@ -33,7 +33,7 @@ mymovies.controller('mainCtrl', function($scope, SiteServices){
 	$scope.Helpers.Site.deviceSensitivities();
 	
 	$scope.$on('$routeChangeStart', function(next, current) { 
-		SiteServices.MobileMenu.close();
+		$scope.Helpers.MobileMenu.close();
 	});
 	 
 	$scope.goPreviousPage = function() {
@@ -113,7 +113,6 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteSer
 				}
 				$scope.pagerArray.pagerItems.push(pagerItem);
 			}
-			console.log($scope.pagerArray);
 			SiteServices.Site.setPageTitle("Search Results: " + $scope.keyword);
 			SiteServices.Preloader.close();
 		}, function(error) {
