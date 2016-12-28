@@ -49,7 +49,7 @@ mymovies.controller('mainCtrl', function($scope, SiteServices){
 			"imdbID": movie.imdbID
 		};
 		watchlist.push(newmovieitem);
-		localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
+		SiteServices.WatchList.set(watchlist);
 		swal({title: "Success!",text: "Movie added your watchlist.",timer: 900,showConfirmButton: false});
 	}
 	
@@ -58,7 +58,7 @@ mymovies.controller('mainCtrl', function($scope, SiteServices){
 		watchlist = _.without(watchlist, _.findWhere(watchlist, {
 		  imdbID: movie.imdbID
 		}));
-		localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
+		SiteServices.WatchList.set(watchlist);
 		swal({title: "Success!",text: "Movie removed from your watchlist.",timer: 900,showConfirmButton: false});
 	}
 	
@@ -96,23 +96,7 @@ mymovies.controller('searchResults', function($scope,$routeParams,$http, SiteSer
 			//return search result
 			$scope.movies = result.data;
 			//crete pager
-			$scope.pagerLength = Math.round($scope.movies.totalResults / 8);
-			$scope.pagerArray = {
-				pagerItems : [],
-				pagerInfo: {
-					prevIndex: Number($scope.index) - 1,
-					nextIndex : Number($scope.index) + 1,
-					isFirstIndex: Number($scope.index) == 1,
-					isLastIndex: Number($scope.index) == $scope.pagerLength
-				}
-			};
-			for (i = 0; i < $scope.pagerLength; i++){
-				var pagerItem = {
-					number: i,
-					isActive: i == Number($scope.index) -1
-				}
-				$scope.pagerArray.pagerItems.push(pagerItem);
-			}
+			$scope.pagerArray = SiteServices.Site.createPager($scope.movies.totalResults, $scope.index);
 			SiteServices.Site.setPageTitle("Search Results: " + $scope.keyword);
 			SiteServices.Preloader.close();
 		}, function(error) {
@@ -152,6 +136,7 @@ mymovies.controller('watchList', function($scope,$http, SiteServices) {
 mymovies.service('SiteServices', function ($window) {
 	SiteServices = { 
 		Site : {
+			siteName: "Movie Collector",
 			scrollTop: function(duration){
 				var scrollStep = -window.scrollY / (duration / 15),
 					scrollInterval = setInterval(function(){
@@ -171,7 +156,26 @@ mymovies.service('SiteServices', function ($window) {
 			setPageTitle : function (title) {
 				$window.document.title = title + " | " + SiteServices.Site.siteName;
 			},
-			siteName: "Movie Collector"
+			createPager: function(totalItem, currentIndex){
+				var pagerLength = Math.round(totalItem / 8);
+				var pagerArray = {
+					pagerItems : [],
+					pagerInfo: {
+						prevIndex: Number(currentIndex) - 1,
+						nextIndex : Number(currentIndex) + 1,
+						isFirstIndex: Number(currentIndex) == 1,
+						isLastIndex: Number(currentIndex) == pagerLength
+					}
+				};
+				for (i = 0; i < pagerLength; i++){
+					var pagerItem = {
+						number: i,
+						isActive: i == Number(currentIndex) -1
+					}
+					pagerArray.pagerItems.push(pagerItem);
+				}
+				return pagerArray;
+			}
 		},
 		Api : {
 			getApiUrl:  "http://www.omdbapi.com/"
@@ -179,6 +183,9 @@ mymovies.service('SiteServices', function ($window) {
 		WatchList : {
 			get:  function(){
 				return localStorage.getItem("userwatchlist") == null ? [] : JSON.parse(localStorage.getItem("userwatchlist"));
+			},
+			set: function(watchlist){
+				localStorage.setItem("userwatchlist", JSON.stringify(watchlist));
 			}
 		},
 		Preloader : {
