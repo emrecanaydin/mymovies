@@ -125,9 +125,11 @@ mymovies.controller('movieDetail', function($scope,$routeParams,$http, SiteServi
 
 mymovies.controller('watchList', function($scope,$http, SiteServices) {
 	$scope.movieList = [];
+	SiteServices.Preloader.open();
 	$scope.loadUserWatchList = function () {
 		$scope.movieList = SiteServices.WatchList.get();
 		SiteServices.Site.setPageTitle("My Watchlist");
+		SiteServices.Preloader.close();
 	};
 	$scope.loadUserWatchList();
 });
@@ -226,4 +228,17 @@ mymovies.service('SiteServices', function ($window) {
 	
 	return SiteServices;
 		
+});
+
+mymovies.directive('img', function() {
+	return {
+		link: function(scope, element, attrs) {
+			element.bind('error', function() {
+				attrs.$set('src', "public/img/poster-error.jpg");
+				//if (attrs.src != attrs.errSrc) {
+					//element.parent().remove();
+				//}
+			});
+		}
+	}
 });
